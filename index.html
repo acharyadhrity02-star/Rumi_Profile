@@ -18,307 +18,369 @@
       --text-light:#6b7280;
       --bg-light:#f9fafb;
       --white:#ffffff;
+      --shadow: 0 8px 22px rgba(0,0,0,0.10);
+      --shadow-strong: 0 14px 40px rgba(0,0,0,0.22);
+      --radius: 16px;
     }
 
     html { scroll-behavior: smooth; }
-    body { font-family:'Inter', sans-serif; line-height:1.6; color:var(--text-dark); }
-    .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+    body { font-family: 'Inter', sans-serif; line-height: 1.65; color: var(--text-dark); background: #fff; }
 
-    /* Navigation */
+    /* ✅ Wider container so desktop doesn't look empty */
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
     nav{
-      background:var(--white);
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
-      position:fixed; width:100%; top:0; z-index:1000;
+      background: var(--white);
+      position: fixed; top:0; left:0; right:0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
     nav .container{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:1rem 20px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0.95rem 24px;
     }
-    .nav-brand{ font-size:1.4rem; font-weight:700; color:var(--primary); letter-spacing:0.2px; }
-    .nav-menu{ display:flex; list-style:none; gap:2rem; }
-    .nav-menu a{ text-decoration:none; color:var(--text-dark); font-weight:500; transition:color .25s; }
-    .nav-menu a:hover{ color:var(--primary); }
+    .nav-brand{ font-size:1.35rem; font-weight:800; color:var(--primary); letter-spacing:0.2px; }
+    .nav-menu{ display:flex; list-style:none; gap:2rem; align-items:center; }
+    .nav-menu a{
+      text-decoration:none; color:var(--text-dark);
+      font-weight:600; font-size:0.98rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .nav-menu a:hover{ color:var(--primary); transform: translateY(-1px); }
     .hamburger{ display:none; flex-direction:column; cursor:pointer; }
-    .hamburger span{ width:25px; height:3px; background:var(--text-dark); margin:3px 0; transition:.3s; }
+    .hamburger span{ width:25px; height:3px; background:var(--text-dark); margin:3px 0; transition:0.3s; border-radius: 2px; }
 
-    /* Hero */
+    /* HERO */
     .hero{
       background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
       color: var(--white);
-      padding: 120px 20px 80px;
-      margin-top: 70px;
+      padding: 110px 20px 54px;
+      margin-top: 66px; /* fixed nav height */
     }
+    .hero-wrap{ max-width: 1240px; margin: 0 auto; }
     .hero-content{
       display:grid;
-      grid-template-columns: 1fr 260px; /* bigger photo column */
-      gap: 3rem;
+      grid-template-columns: 1.25fr 420px;  /* ✅ fills desktop */
+      gap: 2.6rem;
       align-items:center;
-      max-width: 980px;
-      margin: 0 auto;
     }
-    .hero-text h1{ font-size:3rem; font-weight:700; margin-bottom:0.5rem; }
-    .hero-text h2{ font-size:1.8rem; margin-bottom:1rem; opacity:0.95; }
-    .hero-specialties{ font-size:1.1rem; margin-bottom:1.5rem; opacity:0.9; }
-    .hero-location{ font-size:1rem; margin-bottom:0.35rem; opacity:0.95; }
-    .hero-location i{ margin-right:8px; }
 
+    .hero-text h1{
+      font-size: clamp(2.3rem, 3.2vw, 3.35rem);
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.5px;
+    }
+    .hero-text h2{
+      font-size: clamp(1.25rem, 2vw, 1.8rem);
+      margin-bottom: 1rem;
+      opacity: 0.95;
+      font-weight: 650;
+    }
+    .hero-specialties{
+      font-size: 1.08rem;
+      opacity: 0.95;
+      margin-bottom: 1.35rem;
+      max-width: 58ch;
+    }
+    .hero-location{
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      opacity: 0.95;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .hero-location i{ width: 18px; opacity: 0.95; }
+
+    .hero-buttons{
+      display:flex; gap: 0.9rem;
+      margin: 1.6rem 0 1.1rem;
+      flex-wrap: wrap;
+    }
+    .btn{
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 700;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+      display:inline-flex; align-items:center; gap: 0.55rem;
+      white-space: nowrap;
+    }
+    .btn-primary{ background: var(--white); color: var(--primary); }
+    .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,0.20); }
+    .btn-secondary{ background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.9); }
+    .btn-secondary:hover{ background: var(--white); color: var(--primary); }
+
+    .social-links{ display:flex; gap: 1.1rem; }
+    .social-links a{ color: var(--white); font-size: 1.45rem; transition: transform 0.2s, opacity 0.2s; opacity: 0.95; }
+    .social-links a:hover{ transform: translateY(-2px); opacity: 1; }
+
+    /* ✅ Bigger image + consistent ring */
     .hero-photo{
-      width: 240px; height: 240px; /* bigger image */
+      width: 310px;
+      height: 310px;
       border-radius: 50%;
-      border: 5px solid var(--white);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 7px solid rgba(255,255,255,0.95);
+      box-shadow: var(--shadow-strong);
       object-fit: cover;
       object-position: center;
-      background: rgba(255,255,255,0.2);
+      margin-left: auto;
+      display:block;
+      background: rgba(255,255,255,0.15);
     }
 
-    .hero-buttons{ display:flex; gap:1rem; margin:2rem 0 1.5rem; flex-wrap:wrap; }
-    .btn{
-      padding:12px 28px;
-      border-radius:50px;
-      text-decoration:none;
-      font-weight:600;
-      transition: all .25s;
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      white-space:nowrap;
-    }
-    .btn-primary{ background:var(--white); color:var(--primary); }
-    .btn-primary:hover{ transform: translateY(-2px); box-shadow:0 10px 25px rgba(0,0,0,0.2); }
-    .btn-secondary{ background:transparent; color:var(--white); border:2px solid var(--white); }
-    .btn-secondary:hover{ background:var(--white); color:var(--primary); }
+    /* SECTION spacing tightened to reduce emptiness */
+    section{ padding: 56px 20px; }
+    .bg-light{ background: var(--bg-light); }
 
-    .social-links{ display:flex; gap:1.2rem; }
-    .social-links a{ color:var(--white); font-size:1.45rem; transition:transform .25s, opacity .25s; opacity:0.95; }
-    .social-links a:hover{ transform: translateY(-3px); opacity:1; }
-
-    /* Sections */
-    section{ padding:80px 20px; }
-    .bg-light{ background:var(--bg-light); }
     .section-title{
-      font-size:2.5rem; font-weight:700; text-align:center;
-      margin-bottom:3rem; color:var(--text-dark);
+      font-size: clamp(1.9rem, 2.2vw, 2.45rem);
+      font-weight: 800;
+      text-align:center;
+      margin-bottom: 2.0rem;
+      color: var(--text-dark);
+      letter-spacing: -0.3px;
     }
     .section-title::after{
       content:'';
       display:block;
-      width:80px; height:4px;
-      background:var(--primary);
-      margin:1rem auto 0;
-      border-radius:2px;
+      width: 68px; height: 4px;
+      background: var(--primary);
+      margin: 0.85rem auto 0;
+      border-radius: 999px;
     }
 
-    /* Summary */
+    /* SUMMARY (wider, less empty) */
     .summary-box{
-      background:var(--white);
-      padding:2.5rem;
-      border-radius:15px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.1);
-      max-width:1000px;
-      margin:0 auto;
-      border-left:5px solid var(--primary);
+      background: var(--white);
+      padding: 2.2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 1200px;
+      margin: 0 auto;
+      border-left: 6px solid var(--primary);
     }
-    .summary-box p{ font-size:1.1rem; line-height:1.8; color:var(--text-light); }
+    .summary-box p{ font-size: 1.06rem; line-height: 1.9; color: var(--text-light); }
 
-    /* Competencies */
+    /* COMPETENCIES */
     .competencies-grid{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap:1.5rem;
-      max-width:1000px;
-      margin:0 auto;
+      grid-template-columns: repeat(4, minmax(0, 1fr)); /* ✅ fills desktop */
+      gap: 1.2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .competency-tag{
-      background:var(--white);
-      padding:1rem 1.5rem;
-      border-radius:10px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      background: var(--white);
+      padding: 1.05rem 1.15rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       text-align:center;
-      font-weight:500;
-      transition: all .25s;
-      border:2px solid transparent;
+      font-weight: 650;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
-    .competency-tag i{ margin-right:8px; color:var(--primary); }
+    .competency-tag i{ margin-right: 8px; color: var(--primary); }
     .competency-tag:hover{
-      border-color:var(--primary);
+      border-color: rgba(139,92,246,0.55);
       transform: translateY(-3px);
-      box-shadow:0 4px 15px rgba(139,92,246,0.25);
+      box-shadow: 0 10px 26px rgba(139,92,246,0.18);
     }
 
-    /* Experience */
+    /* EXPERIENCE */
+    .experience-wrap{ max-width: 1200px; margin: 0 auto; }
     .experience-item{
-      background:var(--white);
-      padding:2rem;
-      margin-bottom:2rem;
-      border-radius:15px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.1);
-      border-left:5px solid var(--primary);
+      background: var(--white);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border-left: 6px solid var(--primary);
     }
-    .exp-header{
-      display:flex; justify-content:space-between; align-items:flex-start;
-      margin-bottom:1rem; flex-wrap:wrap; gap:1rem;
-    }
-    .exp-title{ font-size:1.5rem; font-weight:700; color:var(--primary); }
+    .exp-header{ display:flex; justify-content:space-between; align-items:flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+    .exp-title{ font-size: 1.45rem; font-weight: 800; color: var(--primary); }
     .exp-date{
-      font-weight:600; color:var(--text-light);
-      background:var(--bg-light);
-      padding:0.5rem 1rem; border-radius:20px;
+      font-weight: 750; color: var(--text-light);
+      background: var(--bg-light);
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
     }
-    .exp-org{ font-size:1.1rem; color:var(--text-dark); margin-bottom:1rem; font-weight:500; }
-    .experience-item ul{ list-style:none; }
+    .exp-org{ font-size: 1.05rem; color: var(--text-dark); margin-bottom: 0.9rem; font-weight: 650; }
+    .experience-item ul{ list-style: none; }
     .experience-item li{
-      padding:0.5rem 0;
-      color:var(--text-light);
-      padding-left:1.5rem;
-      position:relative;
+      padding: 0.45rem 0;
+      color: var(--text-light);
+      padding-left: 1.4rem;
+      position: relative;
     }
     .experience-item li::before{
-      content:'▸';
+      content: '▸';
       position:absolute;
       left:0;
-      color:var(--primary);
-      font-weight:700;
+      color: var(--primary);
+      font-weight: 900;
     }
 
-    /* Projects */
+    /* PROJECTS */
     .projects-grid{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap:2rem;
+      grid-template-columns: repeat(2, minmax(0,1fr)); /* ✅ fills desktop */
+      gap: 1.4rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .project-card{
-      background:var(--white);
-      padding:2rem;
-      border-radius:15px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.1);
-      transition: transform .25s, box-shadow .25s;
+      background: var(--white);
+      padding: 1.9rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .project-card:hover{
-      transform: translateY(-5px);
-      box-shadow:0 8px 25px rgba(139,92,246,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(139,92,246,0.18);
     }
-    .project-icon{ font-size:2.2rem; color:var(--primary); margin-bottom:1rem; }
-    .project-card h3{ font-size:1.25rem; margin-bottom:0.75rem; color:var(--text-dark); }
-    .project-card p{ color:var(--text-light); line-height:1.7; }
+    .project-icon{ font-size: 2.3rem; color: var(--primary); margin-bottom: 0.85rem; }
+    .project-card h3{ font-size: 1.25rem; margin-bottom: 0.7rem; color: var(--text-dark); font-weight: 800; }
+    .project-card p{ color: var(--text-light); line-height: 1.75; }
 
-    /* Publications */
-    .pub-section{ margin-bottom:3rem; }
-    .pub-section h3{ font-size:1.7rem; color:var(--primary); margin-bottom:1.5rem; text-align:center; }
+    /* PUBLICATIONS */
+    .pub-wrap{ max-width: 1200px; margin: 0 auto; }
+    .pub-section{ margin-bottom: 2.2rem; }
+    .pub-section h3{
+      font-size: 1.7rem;
+      color: var(--primary);
+      margin-bottom: 1.1rem;
+      text-align:center;
+      font-weight: 900;
+    }
     .pub-item{
-      background:var(--white);
-      padding:1.5rem;
-      margin-bottom:1.2rem;
-      border-radius:10px;
-      box-shadow:0 2px 10px rgba(0,0,0,0.08);
-      border-left:4px solid var(--primary);
-      transition: transform .25s, box-shadow .25s;
+      background: var(--white);
+      padding: 1.35rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--primary);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .pub-item:hover{
-      transform: translateX(5px);
-      box-shadow:0 4px 15px rgba(139,92,246,0.18);
+      transform: translateX(6px);
+      box-shadow: 0 10px 22px rgba(139,92,246,0.16);
     }
-    .pub-title{ font-weight:600; color:var(--text-dark); margin-bottom:0.5rem; font-size:1.05rem; }
-    .pub-venue{ color:var(--text-light); font-style:italic; font-size:0.95rem; }
     .pub-badge{
       display:inline-block;
-      background:var(--primary);
-      color:var(--white);
-      padding:0.3rem 0.8rem;
-      border-radius:20px;
-      font-size:0.8rem;
-      margin-bottom:0.6rem;
-      font-weight:600;
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      margin-bottom: 0.55rem;
+      font-weight: 800;
     }
+    .pub-title{ font-weight: 750; color: var(--text-dark); margin-bottom: 0.45rem; font-size: 1.03rem; }
+    .pub-venue{ color: var(--text-light); font-style: italic; font-size: 0.95rem; }
 
-    /* Education */
+    /* EDUCATION */
     .education-grid{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap:2rem;
+      grid-template-columns: repeat(3, minmax(0,1fr)); /* ✅ fills desktop */
+      gap: 1.4rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .edu-card{
-      background:var(--white);
-      padding:2rem;
-      border-radius:15px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.1);
-      transition: transform .25s, box-shadow .25s;
+      background: var(--white);
+      padding: 1.8rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .edu-card:hover{
-      transform: translateY(-5px);
-      box-shadow:0 8px 25px rgba(0,0,0,0.12);
-    }
-    .edu-icon{ font-size:2.2rem; color:var(--primary); margin-bottom:1rem; }
-    .edu-card h3{ font-size:1.25rem; margin-bottom:0.5rem; color:var(--text-dark); }
-    .edu-institution{ color:var(--primary); font-weight:600; margin-bottom:0.3rem; }
-    .edu-date{ color:var(--text-light); font-weight:600; }
-    .edu-thesis{ color:var(--text-light); font-size:0.95rem; margin-top:0.8rem; line-height:1.6; font-style:italic; }
+    .edu-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.12); }
+    .edu-icon{ font-size: 2.2rem; color: var(--primary); margin-bottom: 0.75rem; }
+    .edu-card h3{ font-size: 1.2rem; margin-bottom: 0.4rem; color: var(--text-dark); font-weight: 900; }
+    .edu-institution{ color: var(--primary); font-weight: 800; margin-bottom: 0.3rem; }
+    .edu-date{ color: var(--text-light); font-weight: 750; }
+    .edu-thesis{ color: var(--text-light); font-size: 0.95rem; margin-top: 0.75rem; line-height: 1.6; font-style: italic; }
 
-    /* Contact */
+    /* CONTACT */
     .contact-grid{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap:2rem;
-      max-width:900px;
-      margin:0 auto;
+      grid-template-columns: repeat(3, minmax(0,1fr)); /* ✅ fills desktop */
+      gap: 1.4rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .contact-card{
-      background:var(--white);
-      padding:2rem;
-      border-radius:15px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+      background: var(--white);
+      padding: 1.9rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       text-align:center;
-      transition: transform .25s, box-shadow .25s;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .contact-card:hover{
-      transform: translateY(-5px);
-      box-shadow:0 8px 25px rgba(139,92,246,0.22);
-    }
-    .contact-card i{ font-size:2.2rem; color:var(--primary); margin-bottom:1rem; }
-    .contact-card h3{ font-size:1.2rem; margin-bottom:0.6rem; color:var(--text-dark); }
-    .contact-card p{ color:var(--text-light); margin-bottom:0.4rem; }
-    .contact-card a{ color:var(--primary); text-decoration:none; font-weight:600; }
-    .contact-card a:hover{ color:var(--secondary); text-decoration:underline; }
+    .contact-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(139,92,246,0.18); }
+    .contact-card i{ font-size: 2.2rem; color: var(--primary); margin-bottom: 0.8rem; }
+    .contact-card h3{ font-size: 1.2rem; margin-bottom: 0.7rem; color: var(--text-dark); font-weight: 900; }
+    .contact-card p{ color: var(--text-light); margin-bottom: 0.35rem; }
+    .contact-card a{ color: var(--primary); text-decoration:none; font-weight: 750; }
+    .contact-card a:hover{ color: var(--secondary); text-decoration: underline; }
 
-    /* Footer */
+    /* FOOTER */
     footer{
-      background:var(--text-dark);
-      color:var(--white);
-      padding:2rem;
+      background: var(--text-dark);
+      color: var(--white);
+      padding: 2rem;
       text-align:center;
     }
     .footer-links{
-      margin-top:1rem;
+      margin-top: 0.9rem;
       display:flex;
-      gap:2rem;
+      gap: 1.4rem;
       justify-content:center;
       flex-wrap:wrap;
     }
-    .footer-links a{ color:var(--white); text-decoration:none; transition:color .25s; }
-    .footer-links a:hover{ color:var(--accent); }
+    .footer-links a{ color: var(--white); text-decoration:none; font-weight: 650; opacity: 0.95; }
+    .footer-links a:hover{ color: var(--accent); opacity: 1; }
 
-    /* Responsive */
+    /* ✅ Responsive */
+    @media (max-width: 1100px){
+      .hero-content{ grid-template-columns: 1.2fr 340px; }
+      .hero-photo{ width: 270px; height: 270px; }
+      .competencies-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .projects-grid{ grid-template-columns: 1fr; }
+      .education-grid{ grid-template-columns: 1fr; }
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 768px){
       .hamburger{ display:flex; }
       .nav-menu{
-        position:fixed; left:-100%; top:70px;
-        flex-direction:column;
-        background:var(--white);
+        position: fixed;
+        left:-100%;
+        top: 66px;
+        flex-direction: column;
+        background: var(--white);
         width:100%;
         text-align:center;
-        transition:.3s;
-        box-shadow:0 10px 27px rgba(0,0,0,0.05);
-        padding:2rem 0;
+        transition:0.25s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.06);
+        padding: 1.6rem 0;
+        gap: 1.25rem;
       }
       .nav-menu.active{ left:0; }
-
+      .hero{ padding: 92px 18px 44px; }
       .hero-content{ grid-template-columns: 1fr; text-align:center; }
-      .hero-photo{ width:200px; height:200px; margin: 0 auto; }
-      .hero-text h1{ font-size:2.2rem; }
-      .hero-text h2{ font-size:1.4rem; }
+      .hero-photo{ margin: 0 auto; width: 220px; height: 220px; }
       .hero-buttons{ justify-content:center; }
       .social-links{ justify-content:center; }
-      .exp-header{ flex-direction:column; align-items:flex-start; }
+      section{ padding: 46px 18px; }
     }
   </style>
 </head>
@@ -327,6 +389,7 @@
   <nav>
     <div class="container">
       <div class="nav-brand">Rumi Acharya</div>
+
       <ul class="nav-menu" id="navMenu">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -334,61 +397,66 @@
         <li><a href="#publications">Publications</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+
+      <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </div>
     </div>
   </nav>
 
   <section id="home" class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Rumi Acharya</h1>
-        <h2>루미 아차르야</h2>
-        <p class="hero-specialties">Biomaterials • 3D Bioprinting • Smart Hydrogels • Tissue Engineering</p>
-        <p class="hero-location"><i class="fas fa-map-marker-alt"></i> Chuncheon, Republic of Korea</p>
-        <p class="hero-location"><i class="fas fa-phone"></i> +82-10-2531-0294</p>
+    <div class="hero-wrap">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Rumi Acharya</h1>
+          <h2>루미 아차르야</h2>
 
-        <div class="hero-buttons">
-          <a href="#contact" class="btn btn-primary">Get in Touch</a>
-          <a href="https://scholar.google.com/citations?user=d3BaaCoAAAAJ&hl=en" target="_blank" rel="noopener" class="btn btn-secondary">
-            <i class="fas fa-graduation-cap"></i> Google Scholar
-          </a>
+          <p class="hero-specialties">Biomaterials • 3D Bioprinting • Smart Hydrogels • Tissue Engineering</p>
+
+          <p class="hero-location"><i class="fas fa-map-marker-alt"></i> Chuncheon, Republic of Korea</p>
+          <p class="hero-location"><i class="fas fa-phone"></i> +82-10-2531-0294</p>
+
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            <a href="https://scholar.google.com/citations?user=d3BaaCoAAAAJ&hl=en" target="_blank" rel="noopener" class="btn btn-secondary">
+              <i class="fas fa-graduation-cap"></i> Google Scholar
+            </a>
+          </div>
+
+          <div class="social-links">
+            <a href="mailto:acharyarumi7@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.researchgate.net/profile/Rumi-Acharya" target="_blank" rel="noopener" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            <a href="https://scholar.google.com/citations?user=d3BaaCoAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+          </div>
         </div>
 
-        <div class="social-links">
-          <a href="mailto:acharyarumi7@gmail.com" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://www.researchgate.net/profile/Rumi-Acharya" target="_blank" rel="noopener" title="ResearchGate" aria-label="ResearchGate">
-            <i class="fab fa-researchgate"></i>
-          </a>
-          <a href="https://scholar.google.com/citations?user=d3BaaCoAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
-            <i class="fas fa-graduation-cap"></i>
-          </a>
-        </div>
+        <!-- ✅ IMPORTANT: your image file is "Rumi.png" in GitHub root -->
+        <img
+          src="./Rumi.png"
+          alt="Rumi Acharya"
+          class="hero-photo"
+          loading="eager"
+          onerror="this.onerror=null; this.src='https://via.placeholder.com/310/8b5cf6/ffffff?text=RA';"
+        />
       </div>
-
-      <!-- IMPORTANT: image file must be in same folder as index.html -->
-      <img
-        src="Rumi.png"
-        alt="Rumi Acharya"
-        class="hero-photo"
-        loading="lazy"
-        onerror="this.onerror=null; this.src='https://via.placeholder.com/240/8b5cf6/ffffff?text=RA';"
-      />
     </div>
   </section>
 
-  <section id="about" class="section">
+  <section id="about">
     <div class="container">
       <h2 class="section-title">Professional Summary</h2>
       <div class="summary-box">
-        <p>Multidisciplinary researcher specializing in <strong>bioactive and electro-magnetic hydrogel systems</strong> for regenerative medicine, smart skin patches, and biosensing. Skilled in <strong>3D bioprinting, nanocomposite design, microneedle fabrication</strong>, and advanced cellular assays (hBMSCs, HaCaT).</p>
-        <p style="margin-top: 1rem;">Experienced in GLP documentation, ISO 13485 QMS environments, and data-driven scientific communication with publications in <strong>Advanced Healthcare Materials, Advanced Materials Technologies</strong>, and <strong>Journal of Nanobiotechnology</strong>.</p>
+        <p>
+          Multidisciplinary researcher specializing in <strong>bioactive and electro-magnetic hydrogel systems</strong> for regenerative medicine, smart skin patches, and biosensing. Skilled in <strong>3D bioprinting, nanocomposite design, microneedle fabrication</strong>, and advanced cellular assays (hBMSCs, HaCaT).
+        </p>
+        <p style="margin-top: 1rem;">
+          Experienced in GLP documentation, ISO 13485 QMS environments, and data-driven scientific communication with publications in <strong>Advanced Healthcare Materials, Advanced Materials Technologies</strong>, and <strong>Journal of Nanobiotechnology</strong>.
+        </p>
       </div>
     </div>
   </section>
 
-  <section id="competencies" class="section bg-light">
+  <section id="competencies" class="bg-light">
     <div class="container">
       <h2 class="section-title">Core Competencies</h2>
       <div class="competencies-grid">
@@ -406,62 +474,68 @@
     </div>
   </section>
 
-  <section id="experience" class="section">
+  <section id="experience">
     <div class="container">
       <h2 class="section-title">Professional Experience</h2>
 
-      <div class="experience-item">
-        <div class="exp-header">
-          <div>
-            <div class="exp-title">Ph.D. Researcher</div>
-            <div class="exp-org">Bio-Robotics Laboratory, Kangwon National University, Korea</div>
+      <div class="experience-wrap">
+        <div class="experience-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Ph.D. Researcher</div>
+              <div class="exp-org">Bio-Robotics Laboratory, Kangwon National University, Korea</div>
+            </div>
+            <div class="exp-date">Mar 2023 – Present</div>
           </div>
-          <div class="exp-date">Mar 2023 – Present</div>
+          <ul>
+            <li>Developed 3D-printable electro-magnetic hydrogels (mCNC-based) for dual electrical/magnetic cell stimulation and mechanotransduction studies (YAP/TAZ, ZO-1)</li>
+            <li>Designed microneedle hydrogel bioreactors for barrier-function restoration and controlled drug delivery</li>
+            <li>3D-printed metal-ion-doped bio-ceramics scaffolds exhibiting antibacterial and in vitro bioactive characteristics for bone tissue engineering</li>
+            <li>Led end-to-end workflows: CAD → 3D printing → crosslinking → rheology → in vitro imaging</li>
+            <li>Prepared manuscripts, figures, and datasets; collaborated across labs on bioelectronic hydrogel systems</li>
+          </ul>
         </div>
-        <ul>
-          <li>Developed 3D-printable electro-magnetic hydrogels (mCNC-based) for dual electrical/magnetic cell stimulation and mechanotransduction studies (YAP/TAZ, ZO-1)</li>
-          <li>Designed microneedle hydrogel bioreactors for barrier-function restoration and controlled drug delivery</li>
-          <li>3D-printed metal-ion-doped bio-ceramics scaffolds exhibiting antibacterial and in vitro bioactive characteristics for bone tissue engineering</li>
-          <li>Led end-to-end workflows: CAD → 3D printing → crosslinking → rheology → in vitro imaging</li>
-          <li>Prepared manuscripts, figures, and datasets; collaborated across labs on bioelectronic hydrogel systems</li>
-        </ul>
-      </div>
 
-      <div class="experience-item">
-        <div class="exp-header">
-          <div>
-            <div class="exp-title">Researcher</div>
-            <div class="exp-org">BMIL Laboratory, Kookmin University, Korea</div>
+        <div class="experience-item">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Researcher</div>
+              <div class="exp-org">BMIL Laboratory, Kookmin University, Korea</div>
+            </div>
+            <div class="exp-date">Mar 2022 – Feb 2023</div>
           </div>
-          <div class="exp-date">Mar 2022 – Feb 2023</div>
+          <ul>
+            <li>Protein extraction and purification</li>
+            <li>Bacterial colonization and antibacterial drug experiments for resistant bacteria</li>
+          </ul>
         </div>
-        <ul>
-          <li>Protein extraction and purification</li>
-          <li>Bacterial colonization and antibacterial drug experiments for resistant bacteria</li>
-        </ul>
       </div>
     </div>
   </section>
 
-  <section id="research" class="section bg-light">
+  <section id="research" class="bg-light">
     <div class="container">
       <h2 class="section-title">Key R&D Projects</h2>
+
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-bone"></i></div>
           <h3>Bioactive Ion-Reinforced Bio-Ceramic Ink</h3>
           <p>Development of shear-thinning hybrid ink integrating bio-ceramics matrix with bioactive ions and polymeric binders for high-fidelity DIW printing with enhanced osteogenic and antibacterial performance.</p>
         </div>
+
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-gem"></i></div>
           <h3>Mg–Nanodiamond–HAp 3D-Printed Scaffold</h3>
           <p>Ion-releasing hybrid scaffold with controlled Mg²⁺ release (ICP-OES) and osteogenic validation (ALP/ARS/qPCR) for bone tissue engineering applications.</p>
         </div>
+
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-hand-sparkles"></i></div>
           <h3>mCNC Conductive Microneedle Hydrogel</h3>
           <p>Dual-stimulus platform enhancing ZO-1/YAP-TAZ pathways for skin barrier restoration with tunable rheological behavior for smart skin patch applications.</p>
         </div>
+
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-bolt"></i></div>
           <h3>Piezoelectric ZnO–Mg²⁺ Bioglass Scaffold</h3>
@@ -471,73 +545,86 @@
     </div>
   </section>
 
-  <section id="publications" class="section">
+  <section id="publications">
     <div class="container">
       <h2 class="section-title">Publications (2023–2025)</h2>
 
-      <div class="pub-section">
-        <h3><i class="fas fa-star"></i> First Author Publications</h3>
-        <div class="pub-item">
-          <span class="pub-badge">Submitted</span>
-          <div class="pub-title">Anisotropic Magneto-Conductive Hydrogel Modulates YAP/TAZ Pathway for Accelerated Skin Barrier Regeneration</div>
-          <div class="pub-venue">Ceramics International</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2025</span>
-          <div class="pub-title">3D-printed magnesium/nanodiamond dual-doped hydroxyapatite composite hydrogels with antibacterial and in vitro bioactive properties for bone tissue engineering</div>
-          <div class="pub-venue">Journal of the American Ceramic Society, 2025</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2025</span>
-          <div class="pub-title">Physical Stimuli-Responsive DNA Hydrogels: Design, Fabrication Strategies and Biomedical Applications</div>
-          <div class="pub-venue">Journal of Nanobiotechnology, 2025</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2024</span>
-          <div class="pub-title">Single-Walled Carbon Nanotube-Based Optical Nano/Biosensors for Biomedical Applications</div>
-          <div class="pub-venue">Advanced Materials Technologies, 2024</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2023</span>
-          <div class="pub-title">Stimuli-Responsive 3D Printable Conductive Hydrogel: Toward Macrophage Polarization & Wound Healing</div>
-          <div class="pub-venue">Advanced Healthcare Materials, 2023</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2023</span>
-          <div class="pub-title">Electroactive Polymer–Metal Composites for Tissue Regeneration (Review)</div>
-          <div class="pub-venue">Journal of Functional Biomaterials, 2023</div>
-        </div>
-      </div>
+      <div class="pub-wrap">
+        <div class="pub-section">
+          <h3><i class="fas fa-star"></i> First Author Publications</h3>
 
-      <div class="pub-section">
-        <h3><i class="fas fa-users"></i> Selected Co-Author Publications</h3>
-        <div class="pub-item">
-          <span class="pub-badge">2025</span>
-          <div class="pub-title">Tailoring Osteoimmunity and Hemostasis Using 3D-Printed Nano-Photocatalytic Bactericidal Scaffold</div>
-          <div class="pub-venue">Biomaterials, 2025</div>
+          <div class="pub-item">
+            <span class="pub-badge">Submitted</span>
+            <div class="pub-title">Anisotropic Magneto-Conductive Hydrogel Modulates YAP/TAZ Pathway for Accelerated Skin Barrier Regeneration</div>
+            <div class="pub-venue">Ceramics International</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2025</span>
+            <div class="pub-title">3D-printed magnesium/nanodiamond dual-doped hydroxyapatite composite hydrogels with antibacterial and in vitro bioactive properties for bone tissue engineering</div>
+            <div class="pub-venue">Journal of the American Ceramic Society, 2025</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2025</span>
+            <div class="pub-title">Physical Stimuli-Responsive DNA Hydrogels: Design, Fabrication Strategies and Biomedical Applications</div>
+            <div class="pub-venue">Journal of Nanobiotechnology, 2025</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2024</span>
+            <div class="pub-title">Single-Walled Carbon Nanotube-Based Optical Nano/Biosensors for Biomedical Applications</div>
+            <div class="pub-venue">Advanced Materials Technologies, 2024</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2023</span>
+            <div class="pub-title">Stimuli-Responsive 3D Printable Conductive Hydrogel: Toward Macrophage Polarization & Wound Healing</div>
+            <div class="pub-venue">Advanced Healthcare Materials, 2023</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2023</span>
+            <div class="pub-title">Electroactive Polymer–Metal Composites for Tissue Regeneration (Review)</div>
+            <div class="pub-venue">Journal of Functional Biomaterials, 2023</div>
+          </div>
         </div>
-        <div class="pub-item">
-          <span class="pub-badge">2024</span>
-          <div class="pub-title">Electroconductive Nanocellulose — A Versatile Hydrogel Platform</div>
-          <div class="pub-venue">Advanced Healthcare Materials, 2024</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2024</span>
-          <div class="pub-title">Stimuli-Triggered Pollen-Inspired Micro/Nanorobots</div>
-          <div class="pub-venue">Nano Today, 2024</div>
-        </div>
-        <div class="pub-item">
-          <span class="pub-badge">2024</span>
-          <div class="pub-title">3D Printable Hydrogel Bioelectronic Interfaces for Healthcare Monitoring</div>
-          <div class="pub-venue">Advanced Materials Technologies, 2024</div>
+
+        <div class="pub-section">
+          <h3><i class="fas fa-users"></i> Selected Co-Author Publications</h3>
+
+          <div class="pub-item">
+            <span class="pub-badge">2025</span>
+            <div class="pub-title">Tailoring Osteoimmunity and Hemostasis Using 3D-Printed Nano-Photocatalytic Bactericidal Scaffold</div>
+            <div class="pub-venue">Biomaterials, 2025</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2024</span>
+            <div class="pub-title">Electroconductive Nanocellulose — A Versatile Hydrogel Platform</div>
+            <div class="pub-venue">Advanced Healthcare Materials, 2024</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2024</span>
+            <div class="pub-title">Stimuli-Triggered Pollen-Inspired Micro/Nanorobots</div>
+            <div class="pub-venue">Nano Today, 2024</div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-badge">2024</span>
+            <div class="pub-title">3D Printable Hydrogel Bioelectronic Interfaces for Healthcare Monitoring</div>
+            <div class="pub-venue">Advanced Materials Technologies, 2024</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="education" class="section bg-light">
+  <section id="education" class="bg-light">
     <div class="container">
       <h2 class="section-title">Education</h2>
+
       <div class="education-grid">
         <div class="edu-card">
           <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
@@ -546,12 +633,14 @@
           <p class="edu-date">Expected 2026</p>
           <p class="edu-thesis"><strong>Thesis:</strong> 3D-printed metal-ion-doped nanocomposite hydrogels with antibacterial and in vitro bioactive properties for bone tissue engineering</p>
         </div>
+
         <div class="edu-card">
           <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
           <h3>M.Sc. (Plant Science)</h3>
           <p class="edu-institution">Guru Ghasidas Vishwavidyalaya (Central University), India</p>
           <p class="edu-date">2018</p>
         </div>
+
         <div class="edu-card">
           <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
           <h3>B.Sc. (Plant Science)</h3>
@@ -562,20 +651,23 @@
     </div>
   </section>
 
-  <section id="contact" class="section">
+  <section id="contact">
     <div class="container">
       <h2 class="section-title">Get in Touch</h2>
+
       <div class="contact-grid">
         <div class="contact-card">
           <i class="fas fa-envelope"></i>
           <h3>Email</h3>
           <p><a href="mailto:acharyarumi7@gmail.com">acharyarumi7@gmail.com</a></p>
         </div>
+
         <div class="contact-card">
           <i class="fas fa-phone"></i>
           <h3>Phone</h3>
           <p>+82-10-2531-0294</p>
         </div>
+
         <div class="contact-card">
           <i class="fas fa-map-marker-alt"></i>
           <h3>Location</h3>
@@ -599,28 +691,25 @@
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
 
-    function toggleMenu(){
+    hamburger.addEventListener('click', () => {
       navMenu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    }
-
-    hamburger.addEventListener('click', toggleMenu);
-    hamburger.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') toggleMenu();
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
     });
 
     document.querySelectorAll('.nav-menu a').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
       });
     });
 
+    // Subtle nav shadow on scroll
     window.addEventListener('scroll', () => {
       const navbar = document.querySelector('nav');
-      navbar.style.boxShadow = (window.scrollY > 50)
-        ? '0 4px 15px rgba(0,0,0,0.15)'
-        : '0 2px 10px rgba(0,0,0,0.1)';
+      navbar.style.boxShadow = window.scrollY > 30
+        ? '0 6px 18px rgba(0,0,0,0.12)'
+        : '0 2px 10px rgba(0,0,0,0.08)';
     });
   </script>
 </body>
