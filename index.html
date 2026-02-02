@@ -32,7 +32,7 @@
 
     /* Wider layout (less empty space) */
     .container{
-      max-width: 1280px;   /* wider than before */
+      max-width: 1280px;
       margin: 0 auto;
       padding: 0 22px;
     }
@@ -195,8 +195,8 @@
       align-items:center;
     }
     .hero-photo{
-      width: 280px;   /* bigger */
-      height: 280px;  /* bigger */
+      width: 280px;
+      height: 280px;
       border-radius: 999px;
       border: 6px solid rgba(255,255,255,0.92);
       box-shadow: 0 22px 55px rgba(0,0,0,0.28);
@@ -205,7 +205,7 @@
     }
 
     /* ===== SECTIONS ===== */
-    section{ padding: 56px 0; }      /* less empty vertical space than before */
+    section{ padding: 56px 0; }
     .bg-light{ background: var(--bg-light); }
 
     .section-title{
@@ -244,7 +244,7 @@
     .summary-box{
       padding: 24px;
       border-left: 6px solid var(--primary);
-      max-width: 1100px; /* wider than before */
+      max-width: 1100px;
       margin: 0 auto;
     }
     .summary-box p{
@@ -328,45 +328,6 @@
       left:0;
       color: var(--primary);
       font-weight: 900;
-    }
-
-    /* ===== RESEARCH (add your 2 images) ===== */
-    .research-grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-    .research-card{
-      grid-column: span 6;
-      overflow:hidden;
-      transition: 0.2s ease;
-    }
-    .research-card:hover{
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-2);
-    }
-    .research-media{
-      width:100%;
-      height: 340px; /* big and clean */
-      object-fit: cover;
-      display:block;
-      background: rgba(17,24,39,0.04);
-    }
-    .research-body{
-      padding: 16px 16px 18px;
-    }
-    .research-title{
-      font-size: 1.05rem;
-      font-weight: 850;
-      margin-bottom: 8px;
-      color: var(--text-dark);
-    }
-    .research-desc{
-      color: var(--text-light);
-      font-weight: 500;
-      line-height: 1.75;
-      font-size: 0.98rem;
     }
 
     /* ===== PROJECTS ===== */
@@ -569,6 +530,159 @@
     }
     .footer-links a:hover{ color: var(--accent); }
 
+    /* ===== Research Highlights (premium cards + lightbox) ===== */
+    .rh-grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .rh-card{ grid-column: span 6; overflow:hidden; }
+    @media (max-width: 980px){ .rh-card{ grid-column: span 12; } }
+
+    .rh-media{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    .rh-img{
+      width:100%;
+      height: 360px;
+      object-fit: cover;
+      display:block;
+      background: rgba(17,24,39,0.04);
+      transform: scale(1.02);
+      transition: transform 0.5s ease;
+    }
+    .rh-card:hover .rh-img{ transform: scale(1.06); }
+
+    @media (max-width: 768px){ .rh-img{ height: 260px; } }
+
+    .rh-overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.72));
+      pointer-events:none;
+    }
+
+    .rh-top{
+      position:absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+    }
+
+    .rh-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 9px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      color:#fff;
+      font-weight: 750;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.20);
+      font-size: 0.9rem;
+    }
+
+    .rh-btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.14);
+      color:#fff;
+      font-weight: 800;
+      cursor:pointer;
+      transition: 0.2s ease;
+      backdrop-filter: blur(10px);
+    }
+    .rh-btn:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.40);
+    }
+
+    .rh-bottom{
+      position:absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      color:#fff;
+    }
+    .rh-title{
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+      text-shadow: 0 10px 22px rgba(0,0,0,0.45);
+    }
+    .rh-sub{
+      margin-top: 6px;
+      opacity: 0.92;
+      font-weight: 550;
+      line-height: 1.55;
+      text-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    }
+
+    /* Lightbox */
+    .rh-lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(8,10,18,0.82);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      z-index: 9999;
+    }
+    .rh-lightbox.open{ display:flex; }
+    .rh-viewer{
+      width: min(1200px, 96vw);
+      height: min(86vh, 820px);
+      border-radius: 18px;
+      overflow:hidden;
+      background:#0b1220;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.60);
+      position: relative;
+    }
+    .rh-viewer img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display:block;
+      background:#0b1220;
+    }
+    .rh-close{
+      position:absolute;
+      top: 12px;
+      right: 12px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.95);
+      cursor:pointer;
+      font-weight: 900;
+      transition: 0.2s ease;
+      display:grid;
+      place-items:center;
+    }
+    .rh-close:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.16);
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 980px){
       .hero-content{ grid-template-columns: 1fr; }
@@ -579,7 +693,6 @@
       .social-links{ justify-content:center; }
 
       .competency-tag{ grid-column: span 6; }
-      .research-card{ grid-column: span 12; }
       .project-card{ grid-column: span 12; }
       .edu-card{ grid-column: span 12; }
       .contact-card{ grid-column: span 12; }
@@ -607,7 +720,6 @@
       .hero-text h2{ font-size: 1.25rem; }
       .hero-photo{ width: 240px; height: 240px; }
       section{ padding: 48px 0; }
-      .research-media{ height: 260px; }
     }
   </style>
 </head>
@@ -626,6 +738,7 @@
         <li><a href="#research-images">Researches</a></li>
         <li><a href="#research">Projects</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
@@ -763,51 +876,79 @@
     </div>
   </section>
 
-  <!-- RESEARCH IMAGES (YOUR REQUEST) -->
+  <!-- RESEARCH HIGHLIGHTS (UPDATED: pdf_p10.png + pdf_p12.png) -->
   <section id="research-images" class="bg-light">
     <div class="container">
       <h2 class="section-title">Research Highlights</h2>
       <p class="subtext-center">
-        Key visuals from my Mg–ND/HAp composite and hydrogel fabrication workflows.
+        Selected visuals from my Mg–ND/HAp composite scaffold and 3D printing workflow. Click “View” for fullscreen.
       </p>
 
-      <div class="research-grid">
-        <!-- Image 1 -->
-        <div class="research-card card">
-          <!-- IMPORTANT: Put research_new_1.png in same folder as index.html -->
-          <img
-            src="research_new_1.png"
-            alt="Development of Mg–ND/HAp Composite Scaffolds for Antibacterial Bone Regeneration"
-            class="research-media"
-            onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x650/111827/ffffff?text=research_1.png+missing';"
-          />
-          <div class="research-body">
-            <div class="research-title">Development of Mg–ND/HAp Composite Scaffolds for Antibacterial Bone Regeneration</div>
-            <div class="research-desc">
-              Development workflow and microstructural evidence supporting antibacterial Mg–ND/HAp composite scaffold design for bone regeneration.
-            </div>
-          </div>
-        </div>
+      <div class="rh-grid">
+        <!-- Card 1 -->
+        <article class="rh-card card">
+          <div class="rh-media">
+            <img
+              src="pdf_p10.png"
+              alt="Mg–ND/HAp Composite: Structural Evidence (SEM/XRD)"
+              class="rh-img"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://via.placeholder.com/1400x900/111827/ffffff?text=pdf_p10.png+missing';"
+            />
+            <div class="rh-overlay"></div>
 
-        <!-- Image 2 -->
-        <div class="research-card card">
-          <!-- IMPORTANT: Put research_2.png in same folder as index.html -->
-          <img
-            src="research_2.png"
-            alt="Schematic representation of synthesis of the Mg-ND/HAp composite and hydrogel fabrication"
-            class="research-media"
-            onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x650/111827/ffffff?text=research_2.png+missing';"
-          />
-          <div class="research-body">
-            <div class="research-title">Schematic representation of synthesis of the Mg–ND/HAp composite and hydrogel fabrication by a multistep process</div>
-            <div class="research-desc">
-              Synthesis schematic showing Mg, ND, and HAp integration (ball milling/compaction/sintering) and the subsequent multistep hydrogel fabrication pathway.
+            <div class="rh-top">
+              <span class="rh-chip"><i class="fas fa-microscope"></i> SEM • XRD</span>
+              <button class="rh-btn" type="button" data-lightbox="pdf_p10.png">
+                <i class="fas fa-expand"></i> View
+              </button>
+            </div>
+
+            <div class="rh-bottom">
+              <div class="rh-title">Mg–ND/HAp Composite: Structural Evidence</div>
+              <div class="rh-sub">Microstructural validation supporting antibacterial bone scaffold design.</div>
             </div>
           </div>
-        </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="rh-card card">
+          <div class="rh-media">
+            <img
+              src="pdf_p12.png"
+              alt="3D Printing Workflow + Morphology Across Conditions"
+              class="rh-img"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://via.placeholder.com/1400x900/111827/ffffff?text=pdf_p12.png+missing';"
+            />
+            <div class="rh-overlay"></div>
+
+            <div class="rh-top">
+              <span class="rh-chip"><i class="fas fa-print"></i> DIW Process</span>
+              <button class="rh-btn" type="button" data-lightbox="pdf_p12.png">
+                <i class="fas fa-expand"></i> View
+              </button>
+            </div>
+
+            <div class="rh-bottom">
+              <div class="rh-title">3D Printing: Fabrication Workflow + Morphology</div>
+              <div class="rh-sub">End-to-end printing workflow and morphology across experimental conditions.</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
+
+  <!-- LIGHTBOX (Research Highlights) -->
+  <div class="rh-lightbox" id="rhLightbox" aria-hidden="true">
+    <div class="rh-viewer" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="rh-close" id="rhClose" type="button" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+      <img id="rhViewerImg" alt="Fullscreen preview" />
+    </div>
+  </div>
 
   <!-- PROJECTS -->
   <section id="research">
@@ -991,21 +1132,44 @@
   </footer>
 
   <script>
+    // Mobile menu
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
 
-    function toggleMenu(){
-      navMenu.classList.toggle('active');
-    }
-
+    function toggleMenu(){ navMenu.classList.toggle('active'); }
     hamburger.addEventListener('click', toggleMenu);
     hamburger.addEventListener('keydown', (e) => {
       if(e.key === 'Enter' || e.key === ' ') toggleMenu();
     });
-
     document.querySelectorAll('.nav-menu a').forEach(link => {
       link.addEventListener('click', () => navMenu.classList.remove('active'));
     });
+
+    // Research Highlights lightbox
+    const rhLightbox = document.getElementById('rhLightbox');
+    const rhViewerImg = document.getElementById('rhViewerImg');
+    const rhClose = document.getElementById('rhClose');
+
+    function openRh(src){
+      rhViewerImg.src = src;
+      rhLightbox.classList.add('open');
+      rhLightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeRh(){
+      rhLightbox.classList.remove('open');
+      rhLightbox.setAttribute('aria-hidden','true');
+      rhViewerImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-lightbox]').forEach(btn => {
+      btn.addEventListener('click', () => openRh(btn.getAttribute('data-lightbox')));
+    });
+
+    rhClose.addEventListener('click', closeRh);
+    rhLightbox.addEventListener('click', (e) => { if(e.target === rhLightbox) closeRh(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeRh(); });
   </script>
 
 </body>
